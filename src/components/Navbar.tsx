@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              EcoStore
+              Tamana
             </Link>
           </div>
           <div className="hidden sm:flex space-x-8">
@@ -44,7 +44,7 @@ const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <span className="hidden sm:block text-sm font-medium text-gray-700">Hi, {user.username}</span>
-                <button 
+                <button
                   onClick={handleLogout}
                   className="px-5 py-2.5 rounded-full bg-gray-100 text-gray-900 font-medium hover:bg-gray-200 transition-all duration-200"
                 >

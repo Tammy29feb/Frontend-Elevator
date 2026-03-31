@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-[#fafafa]">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
@@ -57,7 +57,7 @@ export default async function Home() {
               View All Products &rarr;
             </button>
           </div>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {products.length > 0 ? (
               products.map((product) => (
@@ -77,15 +77,15 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto bg-gray-900 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] rounded-full"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 blur-[100px] rounded-full"></div>
-          
+
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 relative z-10">Join our newsletter</h2>
           <p className="text-gray-400 text-lg mb-10 max-w-xl mx-auto relative z-10">
             Get exclusive early access to new drops and amazing deals delivered straight to your inbox.
           </p>
           <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-4 relative z-10">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
+            <input
+              type="email"
+              placeholder="Enter your email"
               className="flex-1 px-6 py-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
             />
             <button className="px-8 py-4 bg-white text-gray-900 rounded-2xl font-bold hover:bg-blue-50 transition-all duration-300">
@@ -96,7 +96,7 @@ export default async function Home() {
       </section>
 
       <footer className="py-10 text-center text-gray-400 text-sm">
-        <p>&copy; 2024 EcoStore. All rights reserved.</p>
+        <p>&copy; 2024 TamanaStore. All rights reserved.</p>
       </footer>
     </main>
   );
