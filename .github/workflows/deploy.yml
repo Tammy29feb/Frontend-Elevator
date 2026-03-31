@@ -19,8 +19,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Navigate to project directory
-            cd /home/ubuntu/frontend
+            # Navigate to the correct project directory
+            cd /home/ubuntu/Frontend-HDS/Frontend-Elevator
             
             # Pull latest code
             git pull origin main
@@ -29,5 +29,5 @@ jobs:
             npm install
             npm run build
             
-            # Restart with PM2
+            # Restart or Start with PM2
             pm2 restart frontend || pm2 start npm --name "frontend" -- start
