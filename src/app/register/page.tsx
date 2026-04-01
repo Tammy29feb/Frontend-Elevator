@@ -47,7 +47,7 @@ export default function RegisterPage() {
         <div className="max-w-md mx-auto bg-white rounded-[2.5rem] p-10 shadow-2xl shadow-blue-50 border border-gray-100">
           <div className="text-center mb-10">
             <h1 className="text-3xl font-black text-gray-900 mb-2">Create Account</h1>
-            <p className="text-gray-500">Join TamanaStore today for exclusive benefits</p>
+            <p className="text-gray-500">Join PoluStore today for exclusive benefits</p>
           </div>
 
           {error && (
@@ -76,7 +76,7 @@ export default function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all duration-200"
-                placeholder="john@example.com"
+                placeholder="tanu@gmail.com"
               />
             </div>
             <div>

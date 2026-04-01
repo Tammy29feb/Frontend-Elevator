@@ -96,7 +96,7 @@ export default async function Home() {
       </section>
 
       <footer className="py-10 text-center text-gray-400 text-sm">
-        <p>&copy; 2024 TamanaStore. All rights reserved.</p>
+        <p>&copy; 2024 PoluStore. All rights reserved.</p>
       </footer>
     </main>
   );
