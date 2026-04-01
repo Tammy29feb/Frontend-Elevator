@@ -13,34 +13,57 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          timeout: 60s
           script: |
             set -e
             
-            # Auto-upgrade Node.js if version is below 20
-            NODE_MAJOR=$(node -v | cut -d'.' -f1 | tr -d 'v')
-            if [ "$NODE_MAJOR" -lt 20 ]; then
-              echo "Server is on Node $NODE_MAJOR. Upgrading to Node 20..."
-              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-              sudo apt-get install -y nodejs
+            # Ensure folder exists
+            mkdir -p /home/ubuntu/Frontend-HDS/
+            cd /home/ubuntu/Frontend-HDS/
+            
+            # Clone or Update repository
+            if [ ! -d "Frontend-Elevator" ]; then
+              git clone https://github.com/Tammy29feb/Frontend-Elevator.git
             fi
             
-            # Navigate to the correct project directory
-            cd /home/ubuntu/Frontend-HDS/Frontend-Elevator
+            cd Frontend-Elevator
+            
+            # Auto-upgrade Node.js if version is below 20
+            if ! command -v node &> /dev/null; then
+              echo "Node.js is not installed. Installing Node 20..."
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            else
+              NODE_MAJOR=$(node -v | cut -d'.' -f1 | tr -d 'v')
+              if [ "$NODE_MAJOR" -lt 20 ]; then
+                echo "Server is on Node $NODE_MAJOR. Upgrading to Node 20..."
+                curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+                sudo apt-get install -y nodejs
+              fi
+            fi
+            
+            # Ensure PM2 is installed
+            if ! command -v pm2 &> /dev/null; then
+              sudo npm install -g pm2
+            fi
             
             # Pull latest code
+            git fetch --all
             git checkout main
             git pull origin main
             
             # Install dependencies and build
             npm install
-            npm run build
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} npm run build
             
             # Force restart with explicit port and host binding
             pm2 delete frontend || true
             pm2 start npm --name "frontend" -- run start -- -p 3000 -H 0.0.0.0
             pm2 save
+
